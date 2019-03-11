@@ -1,1 +1,1 @@
-# Video-rental-app
+# Video_Rental
