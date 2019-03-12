@@ -1,27 +1,50 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const { customerSchema } = require("./customer");
-const { movieSchema } = require("./movies");
 
 const rentalSchema = new mongoose.Schema({
-  movie: movieSchema,
-  customer: customerSchema,
+  movie: {
+    type: new mongoose.Schema({
+      title: {
+        type: String,
+        required: true
+      },
+      dailyRentalRate: {
+        type: Number,
+        required: true
+      }
+    })
+  },
+  customer: {
+    type: new mongoose.Schema({
+      name: {
+        type: String,
+        required: true
+      },
+      isGold: {
+        type: Boolean,
+        required: true
+      },
+      phone: {
+        type: Number,
+        required: true
+      }
+    })
+  },
   startDate: {
     type: Date,
-    required: true
+    required: true,
+    default: Date.now
   },
-  endDate: { type: Date, required: true },
+  endDate: Date,
   rentFee: Number
 });
 
-const rental = new mongoose.model("rental", rentalSchema);
+const rental = new mongoose.model("rentals", rentalSchema);
 
 function validateRental(rental) {
   const schema = {
-    movieId: Joi.required(),
-    customerId: Joi.required(),
-    startDate: Joi.required(),
-    endDate: Joi.required()
+    customerId: Joi.objectId().required(),
+    movieId: Joi.objectId().required()
   };
   return Joi.validate(rental, schema);
 }

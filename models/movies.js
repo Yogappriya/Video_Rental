@@ -16,10 +16,11 @@ function validateMovie(movie) {
     title: Joi.string()
       .min(5)
       .max(50)
+      .trim()
       .required(),
     numberInStock: Joi.required(),
     dailyRentalRate: Joi.required(),
-    genreId: Joi.required()
+    genreId: Joi.objectId().required()
   };
   return Joi.validate(movie, schema);
 }

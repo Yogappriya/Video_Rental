@@ -6,6 +6,7 @@ const customers = require("./routes/customers");
 const movies = require("./routes/movies");
 const rental = require("./routes/rental");
 const mongoose = require("mongoose");
+Joi.objectId = require("joi-objectid")(Joi);
 
 mongoose
   .connect("mongodb://localhost/vidly", { useNewUrlParser: true })

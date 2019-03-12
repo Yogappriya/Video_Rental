@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
     return res.status(404).send("Invalid genre");
   }
 
-  let m = new movie({
+  const m = new movie({
     title: req.body.title,
     numberInStock: req.body.numberInStock,
     dailyRentalRate: req.body.dailyRentalRate,
